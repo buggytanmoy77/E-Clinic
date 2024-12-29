@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="initial-scale=1, width=device-width">
+  	<link rel="stylesheet"  href="{{url_for('static',filename = 'style.css')}}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" /> 	
+</head>
+<body>
+		<div class="main">
+			<form class="input-form" action="/submit" method="POST">
+      			<div class="e-clinic"></div>
+      			<div class="heart-rate-parent">
+        				<div class="heart-rate">Heart Rate:</div>
+        				<div class="frame-item">
+							<input type="number" name="heart-rate-text" class = "input-common" placeholder="Enter Heart Rate in Beats per minute" required>
+        				</div>
+      			</div>
+      			<div class="respiratory-rate-parent">
+        				<div class="respiratory-rate">Respiratory Rate:</div>
+        				<div class="frame-item">
+							<input type="number" name="respiratory-rate-text" class = "input-common" placeholder="Enter Respiratory Rate in Breaths per minute" required>
+        				</div>
+      			</div>
+      			<div class="body-temperature-parent">
+        				<div class="body-temperature">Body Temperature:</div>
+        				<div class="frame-item">
+							<input type="number" name="body-temperature-text" class = "input-common" placeholder="Enter Body Temperature in Celcius" required>
+        				</div>
+				</div>
+        		<div class="systolic-blood-pressure-parent">
+          				<div class="systolic-blood-pressure">Systolic Blood Pressure:</div>
+          				<div class="frame-item">
+							<input type="number" name="systolic-text" class = "input-common" placeholder="Enter Systolic Blood Pressure in mmHg" required>
+        				</div>
+      			</div>
+				<div class="diastolic-blood-pressure-parent">
+					<div class="diastolic-blood-pressure">Diastolic Blood Pressure:</div>
+					<div class="frame-item">
+						<input type="number" name="diastolic-text" class = "input-common" placeholder="Enter Diastolic Blood Pressure in mmHg" required>
+					</div>
+				</div>
+      			<div class="oxygen-saturation-parent">
+        				<div class="oxygen-saturation">Oxygen Saturation:</div>
+        				<div class="frame-item">
+							<input type="number" name="oxygen-saturation-text" class = "input-common" placeholder="Enter Oxygen Saturation in percent" required>
+        				</div>
+      			</div>
+				<div class="age-weight-height">
+        				<div class="age-parent">
+							<div class="age">Age:</div>
+							<input type="number" name="age-text" class = "input2" placeholder="Enter Age" required>
+						</div>
+          				<div class="weight-parent">
+							<div class="weight">Weight:</div>
+							<input type="number" name="weight-text" class = "input2" placeholder="Enter Weight in Kgs" required>
+						</div>
+            			<div class="height-parent">
+							<div class="height">Height:</div>
+							<input type="text" name="height-text" class = "input2"placeholder="Enter Height in Meters" required>
+						</div>
+				</div>
+        				<button class="submit" type="submit">Submit</button>
+			</form>
+			<div class="score-recommendation-chatbot">
+				<div class="score-recommendation">
+					<div class="health-score-container">
+						<div class="health-score-heading">Health Score</div>
+						<div class="score-circle">
+							<div class="score-content">
+								<div class="score-number-left">{{ score if score is not none else "N/A" }}</div>
+								<div class="score-divider"></div>
+								<div class="score-number-right">100</div>
+							</div>
+						</div>
+					</div>
+					<div class="recommendation">
+						<div class="recommendation-text">Personalised Health Recommendation</div>
+						<div class="recommendation-output">
+							<pre>{{ recommendation if recommendation is not none else "N/A" }}</pre>
+						</div>
+					</div>
+				</div>
+				<div class="chatbot">
+					<div class="chatbot-text">Medical Chatbot</div>
+					<div class="chatbot-output">
+						<div class="intial">For any kind of Medical Assistance , Use Me</div>
+					</div>
+					<div class="input-container">
+						<input type="text" class="user-input" placeholder="Type your question here...">
+            			<button class="send-button">Send</button>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<script src="/static/script.js"></script>
+</body>
+</html>

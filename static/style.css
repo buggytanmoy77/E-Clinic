@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: white;
+	overflow: hidden;
+	display: flex;
+	height: 100vh;
+	width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+	display: flex;
+    justify-content: center;
+    align-items:stretch;
+	height: 95vh;
+	width: 98vw;
+	font-family: Roboto;
+}
+.input-form{
+	background-color: #a9eaf9;
+	margin: 1%;
+	flex:1.2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    align-items: center;
+	gap: 2.5vh;
+	border-radius: 2%;
+}
+.age-weight-height{
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1vw;
+}
+.e-clinic{
+	width: 40%;
+	height: 12%;
+	background-image: url('eclinic.png');
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;
+}
+.heart-rate-parent,
+.respiratory-rate-parent,
+.body-temperature-parent,
+.systolic-blood-pressure-parent,
+.diastolic-blood-pressure-parent,
+.oxygen-saturation-parent{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+	font-size: larger;
+}
+
+.input-common{
+	width: 20vw;
+	padding: 3.5%;
+	border-radius: 0.8rem;
+}
+
+.age-parent, .weight-parent, .height-parent {
+	flex: 1; 
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1vh;
+	font-size: larger;
+}
+
+.input2{
+	width: 100%;
+	padding: 6%;
+	border-radius: 0.8rem;
+}
+
+.submit{
+	border: solid 1px black;
+	background-color: azure;
+	font-family:Roboto;
+	font-size: larger;
+	padding: 1% 4%;
+	border-radius: 1rem;
+}
+
+.score-recommendation-chatbot{
+	margin: 1%;
+	flex: 1.8;
+	border-radius: 2%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 3.5vh;
+}
+
+.score-recommendation{
+	flex: 1.2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	gap: 2vw;
+}
+
+.health-score-container{
+	flex: 0.8;
+	background-color: #73d86f;
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
+	font-family: Roboto;
+	font-size: larger;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 2.2vh;
+}
+
+.health-score-heading{
+	font-family: Ubuntu;
+	font-size: larger;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border: 3px solid #206a21;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #f0f0f0;
+}
+
+.score-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.score-number-left {
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff4d00;
+}
+
+.score-number-right {
+    position: absolute;
+    right: 35%;
+    bottom: 35%;
+    transform: translate(58%, 59%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #000000d8;
+}
+
+.score-divider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 80px;
+    height: 2px;
+    background-color: #000;
+}
+
+.recommendation{
+	background-color: #f45858;
+	flex:2.3;
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 1.5vh;
+}
+
+.recommendation-text{
+	font-family: Ubuntu;
+	font-size: 1.5rem;
+}
+.recommendation-output{
+	border: solid 3px rgb(191 17 17);
+	border-radius: 1rem;
+	background-color: white;
+	height: 75%;
+	width: 92%;
+	font-size: 0.9rem;
+	padding: 0.6rem;
+}
+.recommendation-output pre{
+	white-space: break-spaces;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	max-width: 100%;
+}
+
+
+.chatbot{
+	flex:1.7;
+	background-color: #859bff;
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.chatbot-text{
+	font-family: Ubuntu;
+	font-size: 1.5rem;
+	margin-bottom: 1vh;
+}
+
+.chatbot-output{
+	display: flex;
+	flex-direction: column;
+	width: 92%;
+	height: 65%;
+	background-color: white;
+	border-radius: 1rem 0rem 0 0;
+	border-top: 3px solid rgb(8, 144, 159);
+	border-left: 3px solid rgb(8, 144, 159);
+	border-right: 3px solid rgb(8, 144, 159);
+	padding: 0.7rem;
+	overflow-y: auto;
+	gap:1vh;
+}
+.intial{
+	align-self: flex-start;
+	max-width: 90%;
+	padding: 0.8rem 2rem;
+	background-color: #deefa1;
+	border: 1px solid black;
+	border-radius: 1rem;
+}
+.user-message{
+	align-self: flex-end;
+	max-width: 90%;
+	padding: 0.8rem 2rem;
+	background-color: #b3effc;
+	border: 1px solid black;
+	border-radius: 1rem;
+}
+.bot-message{
+	align-self: flex-start;
+	max-width: 90%;
+	padding: 0.8rem 2rem;
+	background-color: #deefa1;
+	border: 1px solid black;
+	border-radius: 1rem;
+}
+.input-container{
+	display: flex;
+	width: 92%;
+	height: 12%;
+}
+.user-input{
+	font-size: 1rem;
+	flex: 1;
+	border-bottom-left-radius: 1rem;
+	padding: 8px;
+	border-top: 3px solid black;
+	border-left: 3px solid black;
+	border-bottom: 3px solid black;
+	border-right:none;
+	outline: none;
+}
+.send-button{
+	font-family:Ubuntu;
+	font-size: 1rem;
+	padding: 1vh 2vw;
+	border-bottom-right-radius: 1rem;
+	background-color: rgb(55 255 212 / 68%);
+	border-top:3px solid black;
+	border-right:3px solid black;
+	border-bottom:3px solid black;
+}
