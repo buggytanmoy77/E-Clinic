@@ -1,99 +1,262 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  	<meta charset="utf-8">
-  	<meta name="viewport" content="initial-scale=1, width=device-width">
-  	<link rel="stylesheet"  href="{{url_for('static',filename = 'style.css')}}" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" /> 	
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width">
+  <title>E-Clinic</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-		<div class="main">
-			<form class="input-form" action="/submit" method="POST">
-      			<div class="e-clinic"></div>
-      			<div class="heart-rate-parent">
-        				<div class="heart-rate">Heart Rate:</div>
-        				<div class="frame-item">
-							<input type="number" name="heart-rate-text" class = "input-common" placeholder="Enter Heart Rate in Beats per minute" required>
-        				</div>
-      			</div>
-      			<div class="respiratory-rate-parent">
-        				<div class="respiratory-rate">Respiratory Rate:</div>
-        				<div class="frame-item">
-							<input type="number" name="respiratory-rate-text" class = "input-common" placeholder="Enter Respiratory Rate in Breaths per minute" required>
-        				</div>
-      			</div>
-      			<div class="body-temperature-parent">
-        				<div class="body-temperature">Body Temperature:</div>
-        				<div class="frame-item">
-							<input type="number" name="body-temperature-text" class = "input-common" placeholder="Enter Body Temperature in Celcius" required>
-        				</div>
-				</div>
-        		<div class="systolic-blood-pressure-parent">
-          				<div class="systolic-blood-pressure">Systolic Blood Pressure:</div>
-          				<div class="frame-item">
-							<input type="number" name="systolic-text" class = "input-common" placeholder="Enter Systolic Blood Pressure in mmHg" required>
-        				</div>
-      			</div>
-				<div class="diastolic-blood-pressure-parent">
-					<div class="diastolic-blood-pressure">Diastolic Blood Pressure:</div>
-					<div class="frame-item">
-						<input type="number" name="diastolic-text" class = "input-common" placeholder="Enter Diastolic Blood Pressure in mmHg" required>
-					</div>
-				</div>
-      			<div class="oxygen-saturation-parent">
-        				<div class="oxygen-saturation">Oxygen Saturation:</div>
-        				<div class="frame-item">
-							<input type="number" name="oxygen-saturation-text" class = "input-common" placeholder="Enter Oxygen Saturation in percent" required>
-        				</div>
-      			</div>
-				<div class="age-weight-height">
-        				<div class="age-parent">
-							<div class="age">Age:</div>
-							<input type="number" name="age-text" class = "input2" placeholder="Enter Age" required>
-						</div>
-          				<div class="weight-parent">
-							<div class="weight">Weight:</div>
-							<input type="number" name="weight-text" class = "input2" placeholder="Enter Weight in Kgs" required>
-						</div>
-            			<div class="height-parent">
-							<div class="height">Height:</div>
-							<input type="text" name="height-text" class = "input2"placeholder="Enter Height in Meters" required>
-						</div>
-				</div>
-        				<button class="submit" type="submit">Submit</button>
-			</form>
-			<div class="score-recommendation-chatbot">
-				<div class="score-recommendation">
-					<div class="health-score-container">
-						<div class="health-score-heading">Health Score</div>
-						<div class="score-circle">
-							<div class="score-content">
-								<div class="score-number-left">{{ score if score is not none else "N/A" }}</div>
-								<div class="score-divider"></div>
-								<div class="score-number-right">100</div>
-							</div>
-						</div>
-					</div>
-					<div class="recommendation">
-						<div class="recommendation-text">Personalised Health Recommendation</div>
-						<div class="recommendation-output">
-							<pre>{{ recommendation if recommendation is not none else "N/A" }}</pre>
-						</div>
-					</div>
-				</div>
-				<div class="chatbot">
-					<div class="chatbot-text">Medical Chatbot</div>
-					<div class="chatbot-output">
-						<div class="intial">For any kind of Medical Assistance , Use Me</div>
-					</div>
-					<div class="input-container">
-						<input type="text" class="user-input" placeholder="Type your question here...">
-            			<button class="send-button">Send</button>
-					</div>
-				</div>
-			</div>	
-		</div>
-		<script src="/static/script.js"></script>
+
+<div class="bento">
+
+  <!-- CARD 1: Brand + Form (tall left) -->
+  <div class="bcard bcard-form">
+    <div class="brand-row">
+      <div class="brand-pill">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        E-Clinic
+      </div>
+      <span class="brand-sub">AI Health Monitor</span>
+    </div>
+
+    <!-- Decorative ECG line -->
+    <div class="deco-ecg">
+      <svg viewBox="0 0 260 40" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <polyline points="0,20 30,20 38,20 42,4 46,36 50,20 58,20 90,20 94,8 98,32 102,20 130,20 134,4 138,36 142,20 170,20 174,10 178,30 182,20 210,20 214,6 218,34 222,20 260,20"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <form class="vitals-form" action="/submit" method="POST">
+
+      <!-- SVG dashed zigzag path — sits behind all fields -->
+      <svg class="zz-svg" viewBox="0 0 260 520" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="
+          M 65 30
+          Q 65 68,  130 68
+          Q 195 68, 195 106
+          Q 195 144, 130 144
+          Q 65 144, 65 182
+          Q 65 220, 130 220
+          Q 195 220, 195 258
+          Q 195 296, 130 296
+          Q 65 296, 65 334
+          Q 65 372, 130 372
+          Q 195 372, 195 410
+          Q 195 448, 130 448
+          Q 65 448, 65 486
+        "
+          stroke="rgba(200,230,220,0.35)"
+          stroke-width="1.5"
+          stroke-dasharray="6 5"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <!-- ZIGZAG FIELDS: alternating left / right -->
+      <div class="zz-wrap">
+
+        <!-- Row 1 LEFT: Heart Rate -->
+        <div class="zz-row zz-left">
+          <div class="zz-field">
+            <label>Heart Rate <span class="unit">bpm</span></label>
+            <input type="number" name="heart-rate-text" placeholder="72" required>
+          </div>
+        </div>
+
+        <!-- Row 2 RIGHT: Respiratory Rate -->
+        <div class="zz-row zz-right">
+          <div class="zz-field">
+            <label>Respiratory Rate <span class="unit">br/min</span></label>
+            <input type="number" name="respiratory-rate-text" placeholder="16" required>
+          </div>
+        </div>
+
+        <!-- Row 3 LEFT: Temperature -->
+        <div class="zz-row zz-left">
+          <div class="zz-field">
+            <label>Temperature <span class="unit">°C</span></label>
+            <input type="number" name="body-temperature-text" placeholder="36.6" step="0.1" required>
+          </div>
+        </div>
+
+        <!-- Row 4 RIGHT: O2 Saturation -->
+        <div class="zz-row zz-right">
+          <div class="zz-field">
+            <label>O₂ Saturation <span class="unit">%</span></label>
+            <input type="number" name="oxygen-saturation-text" placeholder="98" required>
+          </div>
+        </div>
+
+        <!-- Row 5 LEFT: Systolic BP -->
+        <div class="zz-row zz-left">
+          <div class="zz-field">
+            <label>Systolic BP <span class="unit">mmHg</span></label>
+            <input type="number" name="systolic-text" placeholder="120" required>
+          </div>
+        </div>
+
+        <!-- Row 6 RIGHT: Diastolic BP -->
+        <div class="zz-row zz-right">
+          <div class="zz-field">
+            <label>Diastolic BP <span class="unit">mmHg</span></label>
+            <input type="number" name="diastolic-text" placeholder="80" required>
+          </div>
+        </div>
+
+        <!-- Row 7 LEFT: Age -->
+        <div class="zz-row zz-left">
+          <div class="zz-field">
+            <label>Age <span class="unit">yrs</span></label>
+            <input type="number" name="age-text" placeholder="25" required>
+          </div>
+        </div>
+
+        <!-- Row 8 RIGHT: Weight -->
+        <div class="zz-row zz-right">
+          <div class="zz-field">
+            <label>Weight <span class="unit">kg</span></label>
+            <input type="number" name="weight-text" placeholder="70" required>
+          </div>
+        </div>
+
+        <!-- Row 9 LEFT: Height -->
+        <div class="zz-row zz-left">
+          <div class="zz-field">
+            <label>Height <span class="unit">m</span></label>
+            <input type="text" name="height-text" placeholder="1.75" required>
+          </div>
+        </div>
+
+      </div><!-- end zz-wrap -->
+
+      <button class="btn-submit" type="submit">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Analyse Health
+      </button>
+    </form>
+  </div>
+
+  <!-- CARD 2: Health Score -->
+  <div class="bcard bcard-score">
+    <div class="score-tag">Health Score</div>
+
+    <!-- Big decorative heart SVG -->
+    <div class="score-graphic">
+      <svg viewBox="0 0 80 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 66s-34-20-34-38a18 18 0 0136 0 18 18 0 0136 0c0 18-38 38-38 38z" fill="currentColor" opacity="0.18"/>
+        <path d="M40 62s-30-18-30-34a15 15 0 0130 0 15 15 0 0130 0c0 16-30 34-30 34z" fill="currentColor" opacity="0.35"/>
+        <path d="M40 56s-24-15-24-28a11 11 0 0124 0 11 11 0 0124 0c0 13-24 28-24 28z" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <div class="score-number">
+      {% set score_val = score if (score is defined and score is not none) else 0 %}
+      <span class="score-big">{{ score if (score is defined and score is not none) else "—" }}</span>
+      <span class="score-of">/ 100</span>
+    </div>
+
+    {% if score is defined and score is not none %}
+    <div class="score-bar-wrap">
+      <div class="score-bar-track">
+        <div class="score-bar-fill" style="width: {{ score }}%"></div>
+      </div>
+      <span class="score-status {% if score >= 75 %}good{% elif score >= 50 %}warn{% else %}poor{% endif %}">
+        {% if score >= 75 %}● Good{% elif score >= 50 %}● Fair{% else %}● Low{% endif %}
+      </span>
+    </div>
+    {% else %}
+    <div class="score-hint">Submit vitals to see your score</div>
+    {% endif %}
+  </div>
+
+
+  <!-- CARD 5: Chatbot -->
+  <div class="bcard bcard-rec">
+    <div class="rec-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      AI Recommendations
+    </div>
+    <div class="rec-scroll">
+      <pre class="rec-text">{{ recommendation if (recommendation is defined and recommendation is not none) else "Submit your vitals above to receive personalised, AI-generated health recommendations." }}</pre>
+    </div>
+  </div>
+
+  <!-- CARD 5: Chatbot -->
+  <div class="bcard bcard-chat">
+    <div class="chat-head">
+      <div class="chat-head-left">
+        <!-- Stethoscope icon SVG -->
+        <div class="chat-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18">
+            <path d="M4.5 6.5a4 4 0 004 4 4 4 0 004-4V3a1 1 0 00-1-1H5.5a1 1 0 00-1 1v3.5z"/>
+            <path d="M8.5 10.5v4a5.5 5.5 0 005.5 5.5v0a5.5 5.5 0 005.5-5.5V13"/>
+            <circle cx="19.5" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <span>Medical Assistant</span>
+      </div>
+      <div class="online-badge">● Live</div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        <div class="msg-bubble">Hello! Ask me any health-related question and I'll help you out.</div>
+      </div>
+    </div>
+
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask a medical question…">
+      <button class="chat-send" id="sendBtn" aria-label="Send">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+{% if is_alert is defined and is_alert %}
+<!-- Dim overlay -->
+<div class="alert-overlay"></div>
+
+<!-- Alert Modal -->
+<div class="alert-modal">
+  <div class="alert-modal-inner">
+    <div class="alert-header">
+      <div class="alert-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div>
+        <div class="alert-title">Critical Vitals Detected</div>
+        <div class="alert-subtitle">One or more readings require immediate attention</div>
+      </div>
+    </div>
+
+    <div class="alert-body">
+      <pre class="alert-text">{{ alert_text }}</pre>
+    </div>
+
+    <div class="alert-footer">
+      <button class="btn-restart" onclick="window.location.href='/'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+        </svg>
+        Start Over
+      </button>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script src="/static/script.js"></script>
 </body>
 </html>
