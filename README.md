@@ -16,7 +16,7 @@
 ## 🚀 Features
 
 - **Health Scoring**: Predicts health scores based on vital signs and other data.
-- **Personalized Plans**: Provides tailored sleep, step, and diet plans based on the health score using **GPT-2 Medium**.
+- **Personalized Plans**: Provides tailored sleep, step, and diet plans based on the health score using **Groq API (LLaMA 3.3-70b-versatile)**.
 - **Medical Q&A Chatbot**: Answers medical queries using **medquad.csv** and **BLOOMZ-560M** models.
 - **Secure Data Handling**: Ensures data privacy with blockchain-backed solutions.
 
@@ -32,8 +32,8 @@
   - Gradient Boosting
   - Neural Networks
 - **AI Models**:
-  - GPT-2 Medium
-  - BLOOMZ-560M
+  - **Groq API** — LLaMA 3.3-70b-versatile (personalized health recommendations)
+  - BLOOMZ-560M (medical chatbot fallback)
 - **Data**:
   - `medquad.csv`: Medical Q&A data for the chatbot.
   - `Final_E-clinic_dataset.csv`: Patient data for health score prediction after Data Preprocessing.
@@ -63,6 +63,17 @@ Install all the necessary Python packages:
 ```bash
 pip install -r requirements.txt
 ```
+
+### 4. Set Up Environment Variables
+Create a `.env.local` file in the project root and add your API keys:
+
+```
+GROQ_API_KEY = your_groq_api_key_here
+HF_API_TOKEN = your_huggingface_token_here
+```
+
+Get your free Groq API key at [console.groq.com](https://console.groq.com) and your Hugging Face token at [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
+
 ## 🚀 Usage Instructions
 ### 1. Generate the Model File
 Before running the application, you need to generate the .pkl file for the health score model:
@@ -86,6 +97,7 @@ http://127.0.0.1:5000
 - `static/`: Contains static assets (CSS, JavaScript, images).
 - `templates/`: HTML templates for the web interface.
 - `requirements.txt`: Lists all Python dependencies.
+- `.env.local`: Environment variables file for API keys (not committed to git).
 - `medquad.csv`: Medical Q&A data for the chatbot.
 - `Final_E-Clinic_dataset.csv`: Patient data for health score prediction.
 
@@ -111,6 +123,3 @@ For any questions or feedback, reach out to:
 - ***Wearable Integration***: Link with smartwatches and fitness trackers to enhance data collection.
 - ***Global Expansion***: Localized health insights and multi-language support.
 - ***Mental Health Services***: Add counseling and mental health features to the platform.
-
-
-

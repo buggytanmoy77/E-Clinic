@@ -11,10 +11,9 @@ from dotenv import load_dotenv
 load_dotenv(".env.local")
 app = Flask(__name__, template_folder='templates')
 
-# ================== Groq Client ==================
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-# ================== Chatbot Data ==================
+
 ChatbotCSV_Path = 'medquad.csv'
 data = pd.read_csv(ChatbotCSV_Path)
 if len(data.columns) >= 2:
@@ -26,11 +25,10 @@ else:
 vectorizer = TfidfVectorizer()
 question_vectors = vectorizer.fit_transform(data['question'].values.astype('U'))
 
-# ================== ChatBot Functionality ==================
 
 def get_llm_response(query):
     Api_Url = "https://api-inference.huggingface.co/models/bigscience/bloomz-560m"
-    Headers = {"Authorization": "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"}
+    Headers = {"Authorization": f"Bearer {os.environ.get('HF_API_TOKEN')}"}
     Payload = {"inputs": query}
     try:
         response = requests.post(Api_Url, headers=Headers, json=Payload)
@@ -60,9 +58,7 @@ def chat():
 
     return jsonify({"response": response})
 
-# ================== Health Score and Recommendation Functionality ==================
 
-# Load model + scaler saved together
 _checkpoint = joblib.load('health_score_model.pkl')
 model_score  = _checkpoint['model']
 score_scaler = _checkpoint['scaler']
@@ -132,9 +128,7 @@ def submit():
     weight = float(request.form.get('weight-text'))
     height = float(request.form.get('height-text'))
 
-    # Order must match training features exactly:
-    # Heart Rate, Respiratory Rate, Body Temperature, Oxygen Saturation,
-    # Systolic BP, Diastolic BP, Age, Weight, Height
+
     raw_input = np.array([[heart_rate, respiratory_rate, body_temperature,
                            oxygen_saturation, systolic_bp, diastolic_bp,
                            age, weight, height]], dtype=float)
@@ -142,7 +136,6 @@ def submit():
     health_score = int(round(model_score.predict(scaled_input)[0]))
     bmi = weight / (float(height) ** 2)
 
-    # Check for critical vital alerts first
     alerts = check_vitals_for_alerts(
         heart_rate, respiratory_rate, body_temperature,
         systolic_bp, diastolic_bp, oxygen_saturation, age, bmi
